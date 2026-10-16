@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Bài 5.3.3 - Moment quán tính của đĩa đặc đồng chất</title>
+<title>Bài 5.3.2 - Moment quán tính của cầu đặc đồng chất</title>
 <style>
 *{box-sizing:border-box;margin:0;padding:0}
 body{font-family:'Segoe UI',Tahoma,sans-serif;background:#1a1a2e;color:#fff}
@@ -47,41 +47,41 @@ details{font-size:.8rem;color:#ccc;background:#1a1a2e;border-radius:4px;padding:
 <body>
 <div id="container">
  <div id="cc">
-  <div id="title"><h1>THÍ NGHIỆM DAO ĐỘNG XOẮN 3D</h1><p>Bài 5.3.3: Moment quán tính của đĩa đặc đồng chất, trục quay qua tâm</p>
+  <div id="title"><h1>THÍ NGHIỆM DAO ĐỘNG XOẮN 3D</h1><p>Bài 5.3.2: Moment quán tính của cầu đặc đồng chất, trục quay qua tâm</p>
    <input type="checkbox" id="lab" checked> <label class="lb" for="lab">Hiện tên bộ phận</label></div>
-  <button id="bView">🔍 Xem đĩa</button>
+  <button id="bView">🔍 Xem quả cầu</button>
   <div id="zoomwrap">
-   <div class="zt"><span>Bộ đếm thời gian hiện số (1): thời gian từ lần quét thứ 1 đến lần thứ n và đồ thị góc lệch θ(t)</span></div>
+   <div class="zt"><span>Bộ đếm thời gian hiện số (1): thời điểm t₁…t₅ của các lần quét (tính từ lúc thả tay) và đồ thị góc lệch θ(t)</span></div>
    <canvas id="zoom"></canvas>
   </div>
  </div>
  <div id="panel">
   <h2>1. Chọn lần đo <span id="tag" style="color:#4ecca3;text-transform:none"></span></h2>
   <div class="row"><span>Lần đo:</span><select id="selT"><option value="0">Lần 1</option><option value="1">Lần 2</option><option value="2">Lần 3</option></select></div>
-  <div class="ins">Đĩa đặc đồng chất khối lượng <b>m = 0,35 kg</b>, bán kính <b>R = 22,5 cm</b>, đặt nằm ngang trên giá gắn vào trục của lò xo xoắn (trục quay đi qua tâm đĩa, vuông góc mặt đĩa). Moment xoắn của lò xo đã xác định ở mục 5.2: <b>D = 0,190 N·m</b> (có thể dùng giá trị bạn đo được). Cờ chắn sáng gắn ở đầu cần chỉ thị dưới đĩa; cổng quang chữ U (3) đặt ở vị trí cân bằng của cờ, nối với bộ đếm (1) qua cáp (2).</div>
+  <div class="ins">Quả cầu đặc đồng chất khối lượng <b>m = 0,96 kg</b>, bán kính <b>R = 14,5 cm</b>, được gắn lên trục của lò xo xoắn (trục quay đi qua tâm quả cầu). Moment xoắn của lò xo đã xác định ở mục 5.2: <b>D = 0,190 N·m</b> (có thể dùng giá trị bạn đo được). Cờ chắn sáng gắn vào quả cầu qua một cần nhỏ; cổng quang chữ U (3) đặt ở vị trí cân bằng của cờ, nối với bộ đếm (1) qua cáp (2).</div>
 
   <h2>2. Thao tác đo</h2>
   <div class="ins" id="guide"></div>
   <details><summary>Nguyên lý thí nghiệm</summary>
    Chu kì dao động xoắn T = 2π√(I/D) (18) nên moment quán tính xác định từ thực nghiệm: <b>I = D·T²/(4π²)</b> (19).<br>
-   Với đĩa đặc đồng chất, trục quay qua tâm và vuông góc mặt đĩa, lý thuyết cho <b>I = mR²/2</b>.<br>
-   Bộ đếm cho thời gian từ lần quét thứ 1 đến lần thứ 5 của cờ qua cổng quang, ứng với 2 chu kì: <b>2T</b>.
+   Với quả cầu đặc đồng chất, trục quay qua tâm, lý thuyết cho <b>I = 2mR²/5</b>.<br>
+   Bộ đếm bắt đầu tính giờ từ lúc thả tay và ghi lại thời điểm t₁, t₂, …, t₅ mỗi lần cờ quét qua cổng quang (cách nhau nửa chu kì). Từ lần quét thứ 1 đến lần thứ 5 là 2 chu kì: <b>2T = t₅ − t₁</b> (không lấy trực tiếp t₅ vì t₁ ≠ 0).
   </details>
-  <button id="bSet">① Quay đĩa lệch khỏi vị trí cân bằng khoảng 90°</button>
+  <button id="bSet">① Quay quả cầu lệch khỏi vị trí cân bằng khoảng 90°</button>
   <div>
    <label for="speed">Tốc độ mô phỏng:</label>
    <select id="speed"><option value="1">Thời gian thực (×1)</option><option value="2" selected>Nhanh ×2</option><option value="4">Rất nhanh ×4</option></select>
   </div>
-  <button id="bRel">② Thả tay cho đĩa dao động</button>
-  <div class="row"><span>2T =</span><input id="inT2" type="number" step="0.001" placeholder="đọc ở lần quét thứ 5"><span>s</span></div>
+  <button id="bRel">② Thả tay cho quả cầu dao động</button>
+  <div class="row"><span>2T =</span><input id="inT2" type="number" step="0.001" placeholder="2T = t₅ − t₁"><span>s</span></div>
   <div class="row"><span>T =</span><input id="inT" type="number" step="0.001" placeholder="T = 2T / 2"><span>s</span></div>
-  <button id="bRec">③ Ghi kết quả vào Bảng 20</button>
+  <button id="bRec">③ Ghi kết quả vào Bảng 19</button>
   <div id="msg"></div>
 
-  <h2>3. Bảng 20 — chu kì đĩa đặc đồng chất</h2>
+  <h2>3. Bảng 19 — chu kì cầu đặc đồng chất</h2>
   <table>
    <thead><tr><th>Lần</th><th>2T (s)</th><th>T (s)</th></tr></thead>
-   <tbody id="tb20"></tbody>
+   <tbody id="tb19"></tbody>
   </table>
 
   <h2>4. Xử lý số liệu</h2>
@@ -92,7 +92,7 @@ details{font-size:.8rem;color:#ccc;background:#1a1a2e;border-radius:4px;padding:
    <div class="row"><span>T̄ =</span><input id="cT" type="number" step="any"><span>s</span></div>
    <div class="ins">Moment quán tính thực nghiệm, công thức (19) với D = 0,190 N·m:</div>
    <div class="row"><span>I =</span><input id="cI" type="number" step="any"><span>kg·m²</span></div>
-   <div class="ins">Moment quán tính lý thuyết I = mR²/2, với m = 0,35 kg, R = 22,5 cm = 0,225 m:</div>
+   <div class="ins">Moment quán tính lý thuyết I = 2mR²/5, với m = 0,96 kg, R = 14,5 cm = 0,145 m:</div>
    <div class="row"><span>I<sub>lt</sub> =</span><input id="cIt" type="number" step="any"><span>kg·m²</span></div>
    <div class="ins">Sai lệch tương đối δ = |I − I<sub>lt</sub>| / I<sub>lt</sub> × 100%:</div>
    <div class="row"><span>δ =</span><input id="cDel" type="number" step="any"><span>%</span></div>
@@ -100,11 +100,11 @@ details{font-size:.8rem;color:#ccc;background:#1a1a2e;border-radius:4px;padding:
    <select id="cNote">
     <option value="">-- chọn nhận xét --</option>
     <option value="a">I thực nghiệm lớn hơn I lý thuyết nhiều lần, phương pháp không đáng tin cậy</option>
-    <option value="b">I thực nghiệm gần với I lý thuyết (sai lệch vài phần trăm); sai lệch do sai số phép đo, do giá gắn đĩa vào trục và ma sát</option>
+    <option value="b">I thực nghiệm gần với I lý thuyết (sai lệch vài phần trăm); sai lệch do sai số phép đo, do giá gắn quả cầu vào trục và ma sát</option>
     <option value="c">I thực nghiệm nhỏ hơn I lý thuyết khoảng một nửa</option>
    </select>
    <details><summary>Gợi ý công thức</summary>
-    T̄ = (T₁ + T₂ + T₃)/3. I = D·T̄²/(4π²) với D (N·m), T̄ (s) cho I (kg·m²). I<sub>lt</sub> = m·R²/2.
+    T̄ = (T₁ + T₂ + T₃)/3. I = D·T̄²/(4π²) với D (N·m), T̄ (s) cho I (kg·m²). I<sub>lt</sub> = 2·m·R²/5.
    </details>
    <button id="bCheck">Kiểm tra kết quả</button>
    <button id="bShow" style="background:#0f3460;margin-top:6px">Xem đáp án</button>
@@ -117,9 +117,9 @@ details{font-size:.8rem;color:#ccc;background:#1a1a2e;border-radius:4px;padding:
 <script>
 const $=id=>document.getElementById(id);
 // ---------- SỐ LIỆU THÍ NGHIỆM - sửa tại đây nếu muốn đổi số liệu ----------
-const MDISC=0.35,RDISC=0.225;       // khối lượng (kg), bán kính đĩa (m)
+const MSPH=0.96,RSPH=0.145;         // khối lượng (kg), bán kính quả cầu (m)
 const D_TRUE=0.19;                   // moment xoắn của lò xo (N·m/rad), đã xác định ở mục 5.2
-const I0=0.00908;                    // moment quán tính thực của đĩa + giá gắn vào trục (kg·m²)
+const I0=0.00826;                    // moment quán tính thực của quả cầu + giá gắn vào trục (kg·m²)
 const GAM=0.0045;                    // hệ số tắt dần (1/s)
 const TH0=[90,89,91];                // góc lệch ban đầu ở ba lần đo (độ)
 const EPSD=[0.002,-0.0015,0.001];
@@ -130,7 +130,7 @@ let S;
 const cc=$('cc'),scene=new THREE.Scene();
 const camera=new THREE.PerspectiveCamera(45,cc.clientWidth/cc.clientHeight,0.1,3000);
 const V3=(x,y,z)=>new THREE.Vector3(x,y,z);
-const FULL={p:V3(20,78,160),t:V3(18,36,0)};
+const FULL={p:V3(20,80,170),t:V3(18,42,0)};
 camera.position.copy(FULL.p);
 const renderer=new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(cc.clientWidth,cc.clientHeight);cc.appendChild(renderer.domElement);
@@ -185,45 +185,46 @@ add(box(.25,.05,16,new THREE.MeshBasicMaterial({color:0x2d6cdf})),0,40.5,0);
 
 // thanh dao động + quả nặng + cờ chắn sáng (nhóm quay quanh trục thẳng đứng)
 const rodG=new THREE.Group();rodG.position.set(0,44,0);scene.add(rodG);
-const rod=cyl(.5,.5,ROD,rodM,16);rod.rotation.z=Math.PI/2;rodG.add(rod);
+const rod=cyl(.5,.5,45,rodM,16);rod.rotation.z=Math.PI/2;rodG.add(rod);
 add(box(5,3,3.6,brass),0,0,0,rodG);
-add(box(.8,5,.8,steel),28.5,-2.5,0,rodG);
-const vane=add(box(3,7,.3,vaneM),28.5,-6,0,rodG);
-const disc=new THREE.Mesh(new THREE.CylinderGeometry(22.5,22.5,1.6,72),M(0x7d858c,.45,.6));add(disc,0,2.4,0,rodG);
-add(box(45,.2,.7,dark),0,3.25,0,rodG);
+add(box(.8,5,.8,steel),21.5,-2.5,0,rodG);
+const vane=add(box(3,7,.3,vaneM),21.5,-6,0,rodG);
+const sphM=M(0x7d858c,.45,.6);
+const sph=new THREE.Mesh(new THREE.SphereGeometry(14.5,48,32),sphM);add(sph,0,12,0,rodG);
+const groove=new THREE.Mesh(new THREE.TorusGeometry(14.55,.28,8,64),dark);add(groove,0,12,0,rodG);
+add(cyl(3.2,3.2,3,dark,20),0,-1.5,0,rodG);
 function makeWeight(){const g=new THREE.Group();
   const b=cyl(2.4,2.4,4,brass,28);b.rotation.z=Math.PI/2;g.add(b);
   add(box(1,1.2,1.2,dark),0,2.9,0,g);
   const hole=cyl(2.45,2.45,.4,dark,28);hole.rotation.z=Math.PI/2;hole.position.x=1.2;g.add(hole);
   rodG.add(g);return g;}
 const wL=makeWeight(),wR=makeWeight();
-const hand=box(3,3,5,skin);add(hand,29,0,2.5,rodG);
+const hand=box(3,3,5,skin);add(hand,19,0,2.5,rodG);
 
 // cổng quang chữ U (3) ở vị trí cân bằng của cờ + giá đỡ riêng
-tripod(29,-16,31);
-add(box(2.2,2.2,14,steel),29,32,-8);
-add(box(12,2,8,dark),28.5,33,0);
-add(box(2,7,5,dark),24,36.5,0);add(box(2,7,5,dark),33,36.5,0);
-add(box(2.4,2,2.4,M(0x111111,.6,.3)),28.5,33,4.6);
+tripod(22,-16,31);
+add(box(2.2,2.2,14,steel),22,32,-8);
+add(box(12,2,8,dark),21.5,33,0);
+add(box(2,7,5,dark),17,36.5,0);add(box(2,7,5,dark),26,36.5,0);
+add(box(2.4,2,2.4,M(0x111111,.6,.3)),21.5,33,4.6);
 const beamM=new THREE.MeshBasicMaterial({color:0xff3355});
-const beam=cyl(.14,.14,9,beamM,8);beam.rotation.z=Math.PI/2;add(beam,28.5,38,0);
+const beam=cyl(.14,.14,9,beamM,8);beam.rotation.z=Math.PI/2;add(beam,21.5,38,0);
 // bộ đếm thời gian hiện số (1) + cáp (2)
 const CT=V3(62,4.6,34);
 add(box(26,9,16,M(0x2d3a45,.5,.4)),CT.x,CT.y,CT.z);
 const ccv=document.createElement('canvas');ccv.width=520;ccv.height=190;
 const ctex=new THREE.CanvasTexture(ccv);
 add(new THREE.Mesh(new THREE.PlaneGeometry(22,7.5),new THREE.MeshBasicMaterial({map:ctex})),CT.x,CT.y+.4,CT.z+8.05);
-scene.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V3(28.5,33,5.8),V3(30,22,12),V3(45,5,26),V3(CT.x-8,6,CT.z+1)]),30,.35,6),new THREE.MeshBasicMaterial({color:0x111111})));
+scene.add(new THREE.Mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V3(21.5,33,5.8),V3(26,22,12),V3(45,5,26),V3(CT.x-8,6,CT.z+1)]),30,.35,6),new THREE.MeshBasicMaterial({color:0x111111})));
 
 // nhãn bộ phận
 const labs=new THREE.Group();scene.add(labs);
 const LAB=(t,x,y,z,w)=>{const l=mkLabel(t,w||34,6.5,'#00e5b0','rgba(0,0,0,.6)');l.position.set(x,y,z);labs.add(l);return l;};
-LAB('Đĩa đặc m = 0,35 kg, R = 22,5 cm',0,60,0,58);
-LAB('Cần chỉ thị mang cờ',40,50,0,36);
+LAB('Quả cầu đặc m = 0,96 kg, R = 14,5 cm',0,78,0,64);
 LAB('Lò xo xoắn (trong trụ)',-14,30,6,40);
 LAB('Thước đo góc',-12,44,12,28);
-LAB('(3) Cảm biến quang chữ U',29,47,0,44);
-LAB('Cờ chắn sáng',44,32,0,28);
+LAB('(3) Cảm biến quang chữ U',36,48,0,44);
+LAB('Cờ chắn sáng',36,32,10,28);
 LAB('(2) Cáp nối',40,12,26,24);
 LAB('(1) Bộ đếm thời gian hiện số',CT.x,16,CT.z,48);
 $('lab').onchange=()=>{labs.visible=$('lab').checked;};
@@ -236,10 +237,10 @@ function beep(f){try{ac=ac||new (window.AudioContext||window.webkitAudioContext)
 
 // ---------- CAMERA ----------
 let camGoal=null,viewIdx=0;
-const VN=['Toàn cảnh','Đĩa','Cổng quang','Bộ đếm'];
+const VN=['Toàn cảnh','Quả cầu','Cổng quang','Bộ đếm'];
 function viewGoal(i){
-  if(i===1)return{p:V3(0,90,66),t:V3(0,42,0)};
-  if(i===2)return{p:V3(42,52,50),t:V3(28.5,38,0)};
+  if(i===1)return{p:V3(0,76,90),t:V3(0,52,0)};
+  if(i===2)return{p:V3(34,52,50),t:V3(21.5,38,0)};
   if(i===3)return{p:V3(CT.x,26,CT.z+46),t:V3(CT.x,6,CT.z)};
   return FULL;}
 $('bView').onclick=()=>{viewIdx=(viewIdx+1)%4;camGoal=viewGoal(viewIdx);$('bView').textContent='🔍 Xem '+VN[(viewIdx+1)%4].toLowerCase();};
@@ -247,7 +248,8 @@ $('bView').onclick=()=>{viewIdx=(viewIdx+1)%4;camGoal=viewGoal(viewIdx);$('bView
 // ---------- BỘ ĐẾM ----------
 function counterText(){
   const p=S.passes,n=p.length;
-  return{n,t:n>=1?p[n-1]-p[0]:0};}
+  return{n,t:n>=1?p[n-1]:0}; // thời gian tính từ lúc thả tay
+}
 function drawCounter3D(){
   const x=ccv.getContext('2d'),W=ccv.width,H=ccv.height,c=counterText();
   x.fillStyle='#071a10';x.fillRect(0,0,W,H);
@@ -264,8 +266,8 @@ function drawCassy(){
   cx.fillStyle='#39ff88';cx.font='bold 15px monospace';cx.fillText('Số lần quét: '+c.n,8,42);
   cx.font='bold 22px monospace';cx.fillText('t = '+c.t.toFixed(3)+' s',8,72);
   cx.font='12px monospace';cx.fillStyle='#8fd8a8';
-  for(let k=1;k<p.length&&k<=NPASS-1;k++)cx.fillText(`lần ${k+1}: ${(p[k]-p[0]).toFixed(3)} s`,8,92+(k-1)*15);
-  cx.font='11px Arial';cx.fillStyle='#8aa';cx.fillText('2T = thời gian từ lần quét 1 đến lần quét 5',8,H-8);
+  for(let k=0;k<p.length&&k<NPASS;k++)cx.fillText(`t${k+1} (lần ${k+1}): ${p[k].toFixed(3)} s`,8,92+k*15);
+  cx.font='11px Arial';cx.fillStyle='#8aa';cx.fillText('2T = t5 − t1 (gốc thời gian: lúc thả tay)',8,H-8);
   const gx0=lw+38,gy0=H/2+4,gw=W-gx0-12,gh=(H-44)/2,tm=10;
   const px=t=>gx0+t/tm*gw,py=a=>gy0-a/100*gh;
   cx.strokeStyle='#27425f';cx.lineWidth=1;cx.fillStyle='#8aa';cx.font='10px Arial';cx.textAlign='right';
@@ -288,7 +290,7 @@ function drawChart(){
   x.strokeStyle='#27425f';x.fillStyle='#8aa';x.font='10px Arial';x.lineWidth=1;x.textAlign='right';
   for(let v=0;v<=ym;v+=2){x.beginPath();x.moveTo(L,py(v));x.lineTo(L+pw,py(v));x.stroke();x.fillText(v,L-4,py(v)+3);}
   x.fillStyle='#8ecae6';x.textAlign='left';x.fillText('I (10⁻³ kg·m²)',2,11);
-  const lt=MDISC*RDISC*RDISC/2*1000;
+  const lt=2*MSPH*RSPH*RSPH/5*1000;
   const ex=allDone()?D_TRUE*(S.rd.t.reduce((p,q)=>p+q,0)/3)**2/(4*Math.PI**2)*1000:null;
   const bars=[['I thực nghiệm',ex,'#00e5ff'],['I lý thuyết',lt,'#ffb142']],bw=Math.min(70,pw/4);
   bars.forEach(([nm,v,col],i)=>{const m=L+pw*(i+.5)/2;x.fillStyle='#8aa';x.textAlign='center';x.fillText(nm,m,H-10);
@@ -307,13 +309,13 @@ function ui(){
   $('inT2').disabled=$('inT').disabled=$('bRec').disabled=st!=='done';
   $('selT').disabled=st==='running'||S.setting;
   let g;
-  if(st==='running')g='Đĩa đang dao động. Bộ đếm tính thời gian từ lần cờ quét qua cổng quang thứ 1; đợi đến lần quét thứ 5...';
-  else if(st==='done')g='Đã đến lần quét thứ 5. Đọc 2T trên bộ đếm (thời gian từ lần quét thứ 1 đến lần thứ 5), tính T = 2T/2, nhập vào hai ô rồi bấm ③.';
-  else if(st==='set')g='Đĩa đang được giữ lệch khoảng 90°. Bấm ② để thả tay.';
+  if(st==='running')g='Quả cầu đang dao động. Bộ đếm tính thời gian từ lúc thả tay và ghi lại thời điểm mỗi lần cờ quét qua cổng quang; đợi đến lần quét thứ 5...';
+  else if(st==='done')g='Đã đến lần quét thứ 5. Đọc t₁ và t₅ trên bộ đếm, tính 2T = t₅ − t₁ và T = 2T/2, nhập vào hai ô rồi bấm ③.';
+  else if(st==='set')g='Quả cầu đang được giữ lệch khoảng 90°. Bấm ② để thả tay.';
   else if(st==='recorded')g=allDone()?'Đã đủ 3 lần đo. Hãy xử lý số liệu ở mục 4.':'Đã ghi. Chọn lần đo tiếp theo ở mục 1 rồi lặp lại ①, ②.';
-  else g=`Lần ${S.tri+1}: ① quay đĩa lệch khoảng 90° so với vị trí cân bằng; ② thả tay và quan sát bộ đếm; đọc 2T ở lần quét thứ 5.`;
+  else g=`Lần ${S.tri+1}: ① quay quả cầu lệch khoảng 90° so với vị trí cân bằng; ② thả tay và quan sát bộ đếm; đọc t₁ và t₅, tính 2T = t₅ − t₁.`;
   $('guide').textContent=g;
-  const tb=$('tb20');tb.innerHTML='';
+  const tb=$('tb19');tb.innerHTML='';
   for(let i=0;i<3;i++){const tr=document.createElement('tr');if(i===S.tri)tr.className='cur';
     tr.innerHTML=`<td>${i+1}</td><td>${f3(S.rd.t2[i])}</td><td>${f3(S.rd.t[i])}</td>`;tb.appendChild(tr);}
   $('calc').classList.toggle('lock',!allDone());
@@ -335,18 +337,19 @@ function step(h){
 function finishRun(){
   const p=S.passes,jit=0.003*Math.sin(S.tri*3+1);
   S.disp=Math.round((p[NPASS-1]-p[0]+jit)*1000)/1000;
-  S.stage='done';msg(`Lần quét thứ 5: bộ đếm hiển thị 2T = ${S.disp.toFixed(3)} s.`,'good');ui();}
+  p[NPASS-1]=p[0]+S.disp; // để t5 − t1 hiển thị đúng bằng 2T
+  S.stage='done';msg('Đã đến lần quét thứ 5. Hãy đọc t₁, t₅ trên bộ đếm và tính 2T = t₅ − t₁.','good');ui();}
 $('bRec').onclick=()=>{
   const t2=parseFloat($('inT2').value),t=parseFloat($('inT').value);
   if(isNaN(t2)||isNaN(t)){msg('Hãy nhập đủ 2T và T.','warn');return;}
-  if(Math.abs(t2-S.disp)>0.0015){msg('Giá trị 2T chưa khớp với bộ đếm. 2T là thời gian từ lần quét thứ 1 đến lần quét thứ 5.','warn');return;}
+  if(Math.abs(t2-S.disp)>0.0015){msg('Giá trị 2T chưa đúng. Nhớ 2T = t₅ − t₁ (không phải t₅), vì bộ đếm tính từ lúc thả tay.','warn');return;}
   if(Math.abs(t-t2/2)>0.002){msg('T chưa đúng. T = 2T / 2.','warn');return;}
   S.rd.t2[S.tri]=t2;S.rd.t[S.tri]=t;S.stage='recorded';
   msg(`✔ Đã ghi lần ${S.tri+1}: 2T = ${t2.toFixed(3)} s, T = ${t.toFixed(3)} s`,'good');ui();};
 
 // ---------- XỬ LÝ SỐ LIỆU ----------
 function expected(){
-  const Tb=S.rd.t.reduce((p,q)=>p+q,0)/3,I=D_TRUE*Tb*Tb/(4*Math.PI**2),It=MDISC*RDISC*RDISC/2;
+  const Tb=S.rd.t.reduce((p,q)=>p+q,0)/3,I=D_TRUE*Tb*Tb/(4*Math.PI**2),It=2*MSPH*RSPH*RSPH/5;
   return{Tb,I,It,del:Math.abs(I-It)/It*100};}
 function check(){
   if(!allDone())return;
@@ -359,7 +362,7 @@ function check(){
   mark('cDel',Math.abs(v('cDel')-e.del)<=1);
   mark('cNote',$('cNote').value==='b');
   const f=$('final');f.style.display='block';
-  if(all)f.innerHTML=`T̄ = ${e.Tb.toFixed(3)} s → I = ${e.I.toExponential(3)} kg·m²<br>I<sub>lt</sub> = mR²/2 = ${e.It.toExponential(3)} kg·m²; δ = ${e.del.toFixed(1)} %<br>Kết luận: moment quán tính đo bằng phương pháp dao động xoắn phù hợp với lý thuyết trong phạm vi sai số.`;
+  if(all)f.innerHTML=`T̄ = ${e.Tb.toFixed(3)} s → I = ${e.I.toExponential(3)} kg·m²<br>I<sub>lt</sub> = 2mR²/5 = ${e.It.toExponential(3)} kg·m²; δ = ${e.del.toFixed(1)} %<br>Kết luận: moment quán tính đo bằng phương pháp dao động xoắn phù hợp với lý thuyết trong phạm vi sai số.`;
   else f.textContent='Còn ô chưa đúng (viền đỏ). Tính lại nhé!';}
 $('bCheck').onclick=check;
 $('bShow').onclick=()=>{if(!allDone())return;const e=expected();
@@ -378,7 +381,7 @@ function updateScene(dt){
     if(Math.abs(S.setTarget-S.th)<1e-4){S.th=S.setTarget;S.setting=false;S.stage='set';ui();}}
   rodG.rotation.y=S.th;
   hand.visible=S.stage==='set'||S.setting;
-  const zv=-28.5*Math.sin(S.th);
+  const zv=-21.5*Math.sin(S.th);
   beamM.color.setHex((Math.abs(zv)<.8||(S.flash>=0&&S.simT-S.flash<.12&&S.stage==='running'))?0x2ecc71:0xff3355);
 }
 
